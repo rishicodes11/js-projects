@@ -11,95 +11,84 @@
 </head>
 <body>
    <h1>Bat Ball Stump Game</h1> 
-   <button class="bat" onclick="
-   const userChoiceMsg='you have chosen bat';
-   let randomNumber= Math.random()*3 
-   let computerChoice;
-   if(randomNumber>0 && randomNumber<=1){
-     computerChoice='Bat';
-   }
-   else if(randomNumber>1 && randomNumber<=2){
-    computerChoice='Ball';
-   }
-   else{
-    computerChoice='Stump';
-   }
- const computerChoiceMsg=`Computer choice is ${computerChoice}`;
- 
- let resultMsg;
-   if(computerChoice === 'Ball'){
-    resultMsg=('you won');
-   }
-   else if(computerChoice === 'Bat'){
-    resultMsg=(`it's a tie`); 
-   }
-   else{
-    resultMsg=('you lost');
-   }
-   
-   alert(`${userChoiceMsg} , ${computerChoiceMsg} and result is ${resultMsg}`);
+   <button class="bat" onclick=" 
+    let computerChoice=generateComputerChoice();
+    let resultMsg=getResult('Bat',computerChoice);
+    showResult('Bat',computerChoice,resultMsg);
 
    ">Bat</button>
 
-
-
-
    <button class="ball" onclick="
-   userChoiceMsg='you have chosen ball';
-   randomNumber = Math.random()*3;
-   if(randomNumber>0 && randomNumber<=1){
-     computerChoice='Bat';
-   }
-   else if(randomNumber>1 && randomNumber<=2){
-    computerChoice='Ball';
-   }
-   else{
-    computerChoice='Stump';
-   }
-   computerChoiceMsg=`Computer choice is ${computerChoice}`;
- 
-   if(computerChoice === 'Stump'){
-    resultMsg='you won';
-   }
-   else if(computerChoice === 'Ball'){
-    resultMsg=`it's a tie`; 
-   }
-   else{
-    resultMsg='you lost';
-   }
-   alert(`${userChoiceMsg} , ${computerChoiceMsg} and result is ${resultMsg}`);
+     computerChoice=generateComputerChoice();
+      resultMsg=getResult('Ball',computerChoice);
+      showResult('Ball',computerChoice,resultMsg);
    
    ">Ball</button>
    
    <button class="stump" onclick="
-   userChoiceMsg='you have chosen Stump';
-   randomNumber = Math.random()*3;
-   if(randomNumber>0 && randomNumber<=1){
-     computerChoice='Bat';
-   }
-   else if(randomNumber>1 && randomNumber<=2){
-    computerChoice='Ball';
-   }
-   else{
-    computerChoice='Stump';
-   }
-   computerChoiceMsg=`Computer choice is ${computerChoice}`;
- 
-   if(computerChoice === 'Bat'){
-    resultMsg='you won';
-   }
-   else if(computerChoice === 'Stump'){
-    resultMsg=`it's a tie`; 
-   }
-   else{
-    resultMsg='you lost';
-   }
-   alert(`${userChoiceMsg} , ${computerChoiceMsg} and result is ${resultMsg}`);
+    computerChoice=generateComputerChoice();
+   resultMsg=getResult('Stump',computerChoice);
+   showResult('Stump',computerChoice,resultMsg);
    
    ">Stump</button>
    
    <script>
+   
+     function generateComputerChoice() {
+        let randomNumber= Math.random()*3 
+        if(randomNumber>0 && randomNumber<=1){
+            return 'Bat';
+        }
+        else if(randomNumber>1 && randomNumber<=2){
+            return 'Ball';
+        }
+        else{
+            return 'Stump';
+        }
+        return computerChoice;
+     }
 
+     function getResult(userMove,computerMove){
+        if(userMove==='Bat'){
+            if(computerMove === 'Ball'){
+                 return 'you won';
+                 }
+             else if(computerMove === 'Bat'){
+                 return `it's a tie`; 
+                 }
+            else{
+                 return 'you lost';
+                 }
+        }
+        else if(userMove==='Ball'){
+            if(computerMove === 'Stump'){
+                 return 'you won';
+                 }
+             else if(computerMove === 'Ball'){
+                 return `it's a tie`; 
+                 }
+            else{
+                 return 'you lost';
+                 }
+        }
+        else{
+            if(computerMove === 'Ball'){
+                 return 'you won';
+                 }
+             else if(computerMove === 'Stump'){
+                 return `it's a tie`; 
+                 }
+            else{
+                 return 'you lost';
+                 }
+        }
+    }
+        function showResult(userMove,computerMove,result){
+
+          alert(`you have chosen ${userMove} ,computer choice is ${computerMove} and result is ${result}`);
+        }
+
+     
    </script>
 </body>
 </html>
