@@ -31,15 +31,26 @@
    showResult('Stump',computerChoice,resultMsg);
    
    ">Stump</button>
+
+   <button onclick="localStorage.clear()
+   resetScore();
+        
+   ">Reset</button>
    
    <script>
-
-    let score={
+       let score;
+    let  scoreStr=localStorage.getItem('score');
+    resetScore(scoreStr);
+    function resetScore(scoreStr){
+        score= scoreStr ? JSON.parse(scoreStr) :{
         win:0,
         lost:0,
         tie:0,
-    };
-   
+        };
+        score.displayScore= function(){
+           return `Won: ${score.win} Lost: ${score.lost} Tie: ${score.tie}`;
+        };          
+    }
      function generateComputerChoice() {
         let randomNumber= Math.random()*3 
         if(randomNumber>0 && randomNumber<=1){
@@ -99,14 +110,14 @@
         }
     }
         function showResult(userMove,computerMove,result){
-
+            localStorage.setItem('Score',JSON.stringify(score));
             console.log(score);
             
 
           alert(`
           you have chosen ${userMove} ,computer choice is ${computerMove}
           ${result}
-          Won: ${score.win} Lost: ${score.lost} Tie: ${score.tie}`);
+          ${score.displayScore()}`);
         }
 
      
