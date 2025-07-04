@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-        body{
-           text-align: center; 
-        }
-
-    </style>
     <title>basic game </title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
    <h1>Bat Ball Stump Game</h1> 
-   <button class="bat" onclick=" 
+
+   
+
+   <button class="choicebutton" onclick=" 
     let computerChoice=generateComputerChoice();
     let resultMsg=getResult('Bat',computerChoice);
     showResult('Bat',computerChoice,resultMsg);
 
-   ">Bat</button>
+   "> <img src="images/bat.png" alt="Bat image" class="choiceImg"> </button>
 
-   <button class="ball" onclick="
+   <button class="choicebutton" onclick="
      computerChoice=generateComputerChoice();
       resultMsg=getResult('Ball',computerChoice);
       showResult('Ball',computerChoice,resultMsg);
    
-   ">Ball</button>
+   "><img src="images/ball.png" alt="Ball image" class="choiceImg"></button>
    
-   <button class="stump" onclick="
+   <button class="choicebutton" onclick="
     computerChoice=generateComputerChoice();
    resultMsg=getResult('Stump',computerChoice);
    showResult('Stump',computerChoice,resultMsg);
    
-   ">Stump</button>
-
-   <button onclick="localStorage.clear()
-   resetScore();
-        
-   ">Reset</button>
+   "><img src="images/stump.png" alt="Stump image" class="choiceImg"></button>
    
+    <h3 id="user-move"></h3>
+    <h3 id="computer-move"></h3>
+    <h3 id="result"></h3>
+    <h3 id="score"></h3>
+
+    <button onclick="localStorage.clear()
+    resetScore();
+         
+    ">Reset</button>
+
    <script>
        let score;
     let  scoreStr=localStorage.getItem('score');
@@ -48,8 +51,9 @@
         tie:0,
         };
         score.displayScore= function(){
-           return `Won: ${score.win} Lost: ${score.lost} Tie: ${score.tie}`;
-        };          
+           return `Score  Won: ${score.win} Lost: ${score.lost} Tie: ${score.tie}`;
+        };  
+        showResult();        
     }
      function generateComputerChoice() {
         let randomNumber= Math.random()*3 
@@ -110,14 +114,15 @@
         }
     }
         function showResult(userMove,computerMove,result){
-            localStorage.setItem('Score',JSON.stringify(score));
+            localStorage.setItem('score',JSON.stringify(score));
             console.log(score);
-            
-
-          alert(`
-          you have chosen ${userMove} ,computer choice is ${computerMove}
-          ${result}
-          ${score.displayScore()}`);
+            document.querySelector('#user-move').innerText=
+             userMove? `you have chosen ${userMove}` : '';
+            document.querySelector('#computer-move').innerText=
+             computerMove?`computer choice is ${computerMove}`: '';
+            document.querySelector('#result').innerText=
+            result || '';
+            document.querySelector('#score').innerText=score.displayScore();
         }
 
      
