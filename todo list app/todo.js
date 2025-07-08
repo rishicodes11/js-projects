@@ -18,9 +18,9 @@ function addTodo(){
     let  dateElement=document.querySelector('#todo-date');
     let todoItem= inputElement.value;
     let todoDate= dateElement.value;
-     todoList.push({item: todoItem, dueDate: todoDate});
-     inputElement.value='';
-     dateElement.value='';
+    todoList.push({item: todoItem, dueDate: todoDate});
+    inputElement.value='';
+    dateElement.valueAsDate=new Date();
 
      displayItems();
 }
